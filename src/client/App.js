@@ -1,20 +1,16 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import io from 'socket.io-client';
 
-export default class App extends Component {
-  state = { username: null };
+export default props => {
+    const [ data, setData ] = useState(null)
+    useEffect(() => {
+        const socket = io('/');
 
-  componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
-  }
-
-  render() {
-    const { username } = this.state;
+        socket.on('server-test', data => {
+            setData(data);
+        });
+    }, []);
     return (
-      <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-      </div>
-    );
-  }
+        data ? <h1>{ data }</h1> : <h1>loading...</h1>
+    )
 }

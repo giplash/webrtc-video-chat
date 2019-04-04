@@ -1,15 +1,19 @@
 import express from 'express';
-import os from 'os';
+import http from 'http';
+import socketIO from 'socket.io';
 
 const app = express();
 
 app.use(express.static('dist'));
 
-app.get('/api/getUsername',
-    (req, res) => res.send({ username: os.userInfo().username })
-);
+const server = http.createServer(app);
+const io = socketIO(server);
 
-app.listen(
+io.on('connection', socket => {
+    socket.emit('server-test', 'Viktor')
+});
+
+server.listen(
     process.env.PORT || 8080,
     () => console.log(`Listening on port ${process.env.PORT || 8080}!`)
 );
