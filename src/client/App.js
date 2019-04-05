@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-export default props => {
-    const [ data, setData ] = useState(null)
-    useEffect(() => {
-        const socket = io('/');
+import './less/index.less';
 
-        socket.on('server-test', data => {
-            setData(data);
-        });
-    }, []);
-    return (
-        data ? <h1>{ data }</h1> : <h1>loading...</h1>
-    )
-}
+import Form from './components/Form';
+import Room from './components/Room';
+
+export default () => (
+    <Router>
+        <Route path="/" exact component={Form} />
+        <Route path="/:roomId/" component={Room} />
+    </Router>
+);

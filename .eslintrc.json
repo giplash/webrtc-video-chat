@@ -8,6 +8,10 @@
   "rules": {
     "no-console": "off",
     "comma-dangle": "off",
+    "indent": ["warn", 4],
+    "react/jsx-indent": ["warn", 4],
+    "react/jsx-indent-props": ["warn", 4],
+    "array-bracket-spacing": ["warn", "always"],
     "react/jsx-filename-extension": "off"
   }
 }
