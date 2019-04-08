@@ -11,6 +11,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
+    console.log('connection');
 });
 
 app.get('*', (req, res) => {

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 
 import './index.less';
 
-export default () => {
+export default (props) => {
     const [ roomName, setRoomName ] = useState('');
     const [ shouldRedirectToRoom, setShouldRedirectToRoom ] = useState(false);
-    const handleClick = (name) => {
+    const handleSubmit = (e, name) => {
+        e.preventDefault();
         if (name === '') {
             return;
         }
@@ -14,27 +15,33 @@ export default () => {
     };
 
     if (shouldRedirectToRoom) {
-        return <Redirect to={roomName} />;
+        return (
+            <Redirect push to={`/${roomName}`} />
+        );
     }
 
     return (
-        <div className="chat-form">
-            <div className="char-form__input-container">
-                <input
-                    type="text"
-                    className="chat-form__input"
-                    placeholder="Enter the room name"
-                    value={roomName}
-                    onChange={e => setRoomName(e.target.value)}
-                />
-                <button
-                    type="submit"
-                    className="chat-form__submit-button button"
-                    onClick={() => handleClick(roomName)}
-                >
-                    Submit
-                </button>
+        [
+            <h1>Gipchat</h1>,
+            <div className="chat-form">
+                <div className="char-form__input-container">
+                    <form onSubmit={(e) => handleSubmit(e, roomName)}>
+                        <input
+                            type="text"
+                            className="chat-form__input"
+                            placeholder="Enter the room name"
+                            value={roomName}
+                            onChange={e => setRoomName(e.target.value)}
+                        />
+                        <button
+                            type="submit"
+                            className="chat-form__submit-button button"
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+        ]
     );
 };
