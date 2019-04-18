@@ -21,27 +21,24 @@ export default (props) => {
     }
 
     return (
-        [
-            <h1>Gipchat</h1>,
-            <div className="chat-form">
-                <div className="char-form__input-container">
-                    <form onSubmit={(e) => handleSubmit(e, roomName)}>
-                        <input
-                            type="text"
-                            className="chat-form__input"
-                            placeholder="Enter the room name"
-                            value={roomName}
-                            onChange={e => setRoomName(e.target.value)}
-                        />
-                        <button
-                            type="submit"
-                            className="chat-form__submit-button button"
-                        >
-                            Submit
-                        </button>
-                    </form>
-                </div>
+        <div className="chat-form">
+            <div className="char-form__input-container">
+                <form onSubmit={(e) => handleSubmit(e, roomName)}>
+                    <input
+                        type="text"
+                        className="chat-form__input"
+                        placeholder="Enter the room name"
+                        value={roomName}
+                        onChange={e => setRoomName(e.target.value)}
+                    />
+                    <button
+                        type="submit"
+                        className="chat-form__submit-button button"
+                    >
+                        Submit
+                    </button>
+                </form>
             </div>
-        ]
+        </div>
     );
 };

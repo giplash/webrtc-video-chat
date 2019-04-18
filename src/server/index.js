@@ -11,7 +11,25 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-    console.log('connection');
+    socket.on('join', room => {
+        socket.join(room, () => {
+            socket.on('ready', () => {
+                socket.broadcast.to(room).emit('ready', socket.id);
+            });
+            socket.on('offer', (id, message) => {
+                socket.to(id).emit('offer', socket.id, message);
+            });
+            socket.on('answer', (id, message) => {
+                socket.to(id).emit('answer', socket.id, message);
+            });
+            socket.on('candidate', (id, message) => {
+                socket.to(id).emit('candidate', socket.id, message);
+            });
+            socket.on('disconnect', () => {
+                socket.broadcast.to(room).emit('bye', socket.id);
+            });
+        });
+    });
 });
 
 app.get('*', (req, res) => {
