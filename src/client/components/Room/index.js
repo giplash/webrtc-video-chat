@@ -7,7 +7,7 @@ import Video from '../Video';
 import './index.less';
 
 const constraints = {
-    audio: false,
+    audio: true,
     video: { facingMode: "user" }
 };
 
