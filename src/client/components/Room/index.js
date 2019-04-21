@@ -161,10 +161,10 @@ export default props => {
     return (
         <div className="room">
             <div className="room__local-video-container">
-                <Video stream={localStream} className="room__local-video" />
+                <Video stream={localStream} className="room__local-video" muted/>
             </div>
             <div className="room__remote-video-container">
-                {Object.values(remoteStreams).map((stream, i) => <Video stream={stream} className="room__remove-video" key={i}/>)}
+                {Object.values(remoteStreams).map((stream, i) => <Video stream={stream} className="room__remote-video" key={i} />)}
             </div>
         </div>
     );

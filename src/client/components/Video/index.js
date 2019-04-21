@@ -10,6 +10,12 @@ export default (props) => {
     });
 
     return (
-        <video ref={element} playsInline autoPlay className={props.className}/>
+        <video
+            ref={element}
+            playsInline
+            autoPlay
+            className={props.className}
+            muted={props.muted}
+        />
     );
 };

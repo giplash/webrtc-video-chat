@@ -5,7 +5,7 @@ import path from 'path';
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static('dist'));
 
 const server = http.createServer(app);
 const io = socketIO(server);
@@ -33,8 +33,6 @@ io.on('connection', (socket) => {
 });
 
 app.get('*', (req, res) => {
-    console.log(`dirname  ${__dirname}`);
-    console.log(path.join(__dirname, '../dist/index.html'));
     res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
